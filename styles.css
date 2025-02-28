@@ -185,6 +185,8 @@ textarea:focus, #noteContent:focus, #inputContent:focus {
     margin-left: 15px;
     height : 495px;
     width : 45px;
+
+    display : flex !important;
 }
 
 .toolButton {
