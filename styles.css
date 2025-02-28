@@ -1,0 +1,222 @@
+* {
+    background-color: rgb(61, 57, 57);
+    padding: 0;
+    margin: 0;
+    
+    color: white;
+    font-size: 25px;
+    font-family: Times New Roman;
+}
+
+form {
+    border-radius: 50px;
+    height: 55px;
+    width: 380px;
+}
+
+#searchInput {
+    border-bottom-left-radius: 50px;
+    border: 2px solid hsl(271, 76%, 53%);
+    border-top-left-radius: 50px;
+    border-right: none;
+    padding-left: 25px;
+    font-size: large;
+    width: 360px;
+    height:55px;
+}
+
+#searchInput:focus {
+    outline: none;
+}
+
+#search-icon {
+    margin: 10px;
+    height: 35px;
+    width: 35px;
+}
+
+.imgBox {
+    border-bottom-right-radius: 50px;
+    border: 2px solid blueviolet;
+    border-top-right-radius: 50px;
+    border-left: none;
+    padding: auto;
+    height: 55px;
+    width: 55px;
+}
+
+.favs {
+    height: 25px;
+    width: 25px;
+    margin: 5px;
+}
+
+button {
+    font-size: 25px;
+    border: none;
+}
+
+#createNewNote, #goBack {
+    background-color: blueviolet;
+    border-radius: 50px;
+    width: 230px;
+    height: 55px;
+}
+
+#saveNote, #updateNote {
+    background-color: blueviolet;
+    border-radius: 50px;
+    width: 380px;
+    height: 55px;
+}
+
+input {
+    font-size: large;
+    border: none;
+    width: 100%;
+
+    color: white;
+    font-size: 25px;
+    font-family: Times New Roman;
+}
+
+input:focus {
+    outline: none;
+}
+
+input:-webkit-autofill {
+    -webkit-appearance: menulist-button !important;
+    background-image: none !important;
+    background-color: rgb(61, 57, 57) !important;
+    color: white !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+input:-webkit-autofill::first-line {
+    color: white !important;
+    background-color: rgb(61, 57, 57) !important;
+}
+
+input:-webkit-autofill:focus {
+    background-color: rgb(61, 57, 57) !important;
+    color: white !important;
+}
+
+textarea, #noteContent {
+    box-sizing: border-box;
+    font-size: large;
+    font-size: 25px;
+    margin-top: 5px;
+    height: 420px;
+    border: none;
+    width: 100%;
+}
+
+textarea:focus, #noteContent:focus, #inputContent:focus {
+    outline: none;
+}
+
+#noteContent:empty::before {
+    content: attr(data-placeholder);
+    color: rgb(149, 147, 147);
+    text-align: left;
+    font-size: 25px;
+    opacity: 0.7;
+}
+
+.note {
+    border: 2px solid blueviolet;
+    border-radius: 30px;
+    padding: 15px;
+    height: 150px;
+    width: 820px;
+    margin:auto;
+
+    margin-bottom: 20px;
+}
+
+#note {
+    border: 2px solid blueviolet;
+    border-radius: 25px;
+    padding: 15px;
+    height: 460px;
+    width: 800px;
+}
+
+.date {
+    font-size: 25px !important;
+}
+
+.taskbar-view {
+    display: flex; 
+    justify-content: space-between;
+    border: 2px solid blueviolet;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom: none;
+    width: 800px; 
+    height: 30px; 
+    margin: auto;
+    padding: 15px;
+}
+
+.card {
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border: 2px solid blueviolet;
+    font-size: 1.5em;
+    padding: 15px;
+    height: 400px;
+    width: 800px;
+    margin: auto;
+}
+
+.card hr {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.toolBar {
+    border: 2px solid blueviolet;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+    border-radius: 22px;
+    padding-top: 20px;
+    margin-left: 15px;
+    height : 495px;
+    width : 45px;
+}
+
+.toolButton {
+    margin-right: 7.5px;
+    margin-left: 7.5px;
+    border-radius: 5px;
+    height: 33px;
+    width: 30px;
+}
+
+.toolButton.active {
+    border: 2px solid white;
+}
+
+#subButton {
+    margin-right: 7.5px;
+    margin-left: 7.5px;
+    border-radius: 5px;
+    height: 35px !important;
+    width: 30px;
+}
+
+.toolColor {
+    margin-bottom: 2.5px;
+    margin-right: 7.5px;
+    margin-left: 7.5px;
+    border-radius: 50%;
+    margin-top: 2px;
+    height: 30px;
+    width: 30px;
+}
+
+.toolColor.active {
+    border: 2px solid white;
+}

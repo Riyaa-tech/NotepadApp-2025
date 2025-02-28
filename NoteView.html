@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Note View</title>
+</head>
+<body>
+    <div class="header" style="background-color: blueviolet; width: 100%; height: 50px; display:flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <div style="background-color: blueviolet; margin-left: 30px; display: flex; align-items: center;">
+            <img src="./Favicons/icon-notepad.png" style="background-color: blueviolet; height: 42px; margin-top: 3px;">
+            <div style="background-color: blueviolet; margin-left: 5px;">Notepad</div>
+        </div>
+        <div style="background-color: blueviolet; margin-right: 30px;">Turning ideas into words, one note at a time!</div>
+    </div>
+
+    <div id="taskbar" style="display:flex; justify-content: space-between; height: 75px; width: 820px; margin: auto;">
+
+        <button id="updateNote" type="submit">Update Note</button>
+
+        <button id="goBack" type="submit">Go back</button>
+
+    </div>
+
+    <div class="container" style="display: flex; justify-content: center;">
+        <div class="NoteView">
+            <div class="taskbar-view">
+                <div id="displayHeading">Loading...</div>
+                <div class="icons">
+                    <button  id="edit-icon"><img src="/Favicons/icon-edit.png" class="favs"></button>
+                    <button id="copy-icon"><img src="/Favicons/icon-copy.png" class="favs"></button>
+                    <button id="delete-icon"><img src="/Favicons/icon-delete.png" class="favs"></button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div id="displayContent">Loading...</div>
+                <div id="inputContent" contenteditable="true" style="display:none; height: 390px;"></div>
+            </div>
+        </div>
+
+        <div id="toolDisplay">
+            <div class="toolBar" style="display: flex; flex-direction: column; gap: 3.5px; align-items: center;">
+
+                <button class="toolButton" id="boldButton" style="font-size: medium;"><b>B</b></button>
+                <button class="toolButton" id="underlineButton"><u>U</u></button>
+                <button class="toolButton" id="italicsButton"><I>I</I></button>
+                <button class="toolButton" id="strikeButton"><strike>ab</strike></button>
+                <button class="toolButton" id="supButton">a<sup style="font-size: medium;">b</sup></button>
+                <button class="toolButton" id="subButton">a<sub style="font-size: medium;">b</sub></button>
+                <div style="height: 10px;"></div>
+                <button class="toolColor" id="white"><img src="./Favicons/icon-circleWhite.png" style="height: 17px; width: 17px;"></button>
+                <button class="toolColor" id="black"><img src="./Favicons/icon-circleBlack.png"></button>
+                <button class="toolColor" id="blue"><img src="./Favicons/icon-circleBlue.png"></button>
+                <button class="toolColor" id="red"><img src="./Favicons/icon-circleRed.png"></button>
+                <button class="toolColor" id="yellow"><img src="./Favicons/icon-circleYellow.png"></button>
+                <button class="toolColor" id="green"><img src="./Favicons/icon-circleGreen.png"></button>
+    
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" style="background-color: blueviolet; height: 18px; width: 100%; bottom: 0; display:flex; justify-content: center; position: fixed;">
+        <div style="background-color: blueviolet; font-size: 13px;">Copyright 
+            <img src="./Favicons/icon-copyright.png" style="background-color: blueviolet; height: 12px; width: 12px;"> 
+            2021 Notepad | All Rights Reserved</h5>
+    </div>
+
+    <script>
+        class Note
+        {
+            constructor (title, content, date)
+            {
+                this.title = title;
+                this.content = content;
+                this.date = date;
+            }
+        }
+
+        let isEditing = false;
+
+        const goBackButton = document.getElementById("goBack");
+        goBackButton.addEventListener("click", function(event) {
+            if (isEditing) {
+                event.preventDefault();
+                alert("You cannot go back while editing the note. Update the note to save the changes!");
+            } else {
+                window.location.href = '/index.html';
+            }
+        });
+
+        const toolBar = document.querySelector(".toolBar");
+        function toggleToolbar() {
+            if (isEditing) {
+                toolBar.style.display = "block";
+            } else {
+                toolBar.style.display = "none";
+            }
+        }
+        toggleToolbar();
+
+        const updateButton = document.getElementById("updateNote");
+        updateButton.addEventListener("click", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const key = urlParams.get('key');
+            const storedValue = localStorage.getItem(key);
+            const parsedValue = JSON.parse(storedValue);
+
+            const date = parsedValue.date;
+            console.log(date);
+            const newContent = inputContent.value;
+
+            localStorage.removeItem(key);
+
+            let noteNew = new Note(key, newContent, date);
+            localStorage.setItem(noteNew.title, JSON.stringify({title: noteNew.title, date: noteNew.date, content : noteNew.content}));
+            alert("Note has been updated and saved to local storage!");
+            isEditing = false;
+            goBackButton.style.backgroundColor = "";
+            goBackButton.style.color = "";
+            toggleToolbar();
+        });
+
+        const editButton = document.getElementById("edit-icon");
+        editButton.addEventListener("click", function() {
+            isEditing = true;
+            goBackButton.style.backgroundColor = "rgb(105, 19, 184)";
+            goBackButton.style.color = "#ccc7c7";
+            toggleToolbar();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const key = urlParams.get('key');
+            const storedValue = localStorage.getItem(key);
+            const parsedValue = JSON.parse(storedValue);
+            const currentContent = parsedValue.content;
+            displayContent.style.display = "none";
+            inputContent.style.display = "block";
+
+            inputContent.innerHTML = currentContent;
+        });
+
+        const copyButton = document.getElementById("copy-icon");
+        copyButton.addEventListener("click", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const key = urlParams.get('key');
+            const storedValue = localStorage.getItem(key);
+            const parsedValue = JSON.parse(storedValue);
+            const text = parsedValue.content;
+
+            const temp = document.createElement('input');
+            temp.value = text;
+            document.body.appendChild(temp);
+
+            temp.select();                      //selects the text
+            temp.setSelectionRange(0, 99999);   //sets the range for the text
+            document.execCommand('copy');       //copies the text to clipboard
+
+            document.body.removeChild(temp);
+            alert(`Content copied to clipboard!`);
+
+        });
+
+        const deleteButton = document.getElementById("delete-icon");
+        deleteButton.addEventListener("click", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const key = urlParams.get('key');
+            localStorage.removeItem(key);
+            alert(`Note ${key} has been deleted.`);
+            window.location.href = '/index.html';
+        });
+
+
+        function displayLocalStorage() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const key = urlParams.get('key');
+        const storedValue = localStorage.getItem(key);
+        const parsedValue = JSON.parse(storedValue);
+        const displayElementContent = document.getElementById('displayContent');
+        displayElementContent.innerHTML = `
+            <div style="text-overflow: ellipsis; font-family: Times New Roman;">${parsedValue.content}</div>
+        `;
+
+        const displayElementHeading = document.getElementById('displayHeading');
+        displayElementHeading.innerHTML = `
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 520px; text-overflow: ellipsis; font-size: 28px; font-family: Times New Roman;">${key}</div>
+                <div style="display: flex; justify-content: space-between;">
+                    <img src="/Favicons/icon-date.png" class="favs">
+                    <h2 style="width: 120px; margin-top: 5px;">${parsedValue.date}</h2>
+                </div>
+            </div>
+        `;
+        };
+        displayLocalStorage();
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttonColors = document.querySelectorAll(".toolColor");
+            const inputContent = document.getElementById("inputContent");
+
+            function selectButton(selectedButton) {
+                buttonColors.forEach((button) => button.classList.remove("active"));
+                selectedButton.classList.add("active");
+            }
+
+            const defaultButton = document.getElementById("white");
+            if (defaultButton) {
+                selectButton(defaultButton);
+            }
+
+            buttonColors.forEach((button) => {
+                button.addEventListener("click", function () {
+                    selectButton(this);
+                    selectedColor = this.id;
+                    document.execCommand("styleWithCSS", false, true);    //apply styles as CSS set to true, very important
+                    document.execCommand("foreColor", false, selectedColor);
+                    console.log(this.id);
+                });
+            });
+            inputContent.addEventListener("keyup", function () {
+                document.execCommand("foreColor", false, selectedColor);  // Ensure text continues in the selected color after pressing a key
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const boldButton = document.getElementById("boldButton");
+
+            boldButton.addEventListener("click", function () {
+                document.execCommand("bold");                   // Apply or remove bold
+                boldButton.classList.toggle("active");
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const underlineButton = document.getElementById("underlineButton");
+
+            underlineButton.addEventListener("click", function () {
+                document.execCommand("underline");               // Apply or remove underline
+                underlineButton.classList.toggle("active");
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const italicsButton = document.getElementById("italicsButton");
+
+            italicsButton.addEventListener("click", function () {
+                document.execCommand("italic");               // Apply or remove italics
+                italicsButton.classList.toggle("active");
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const strikeButton = document.getElementById("strikeButton");
+
+            strikeButton.addEventListener("click", function () {
+                document.execCommand("strikeThrough", false, "");              // Apply or remove strikes
+                strikeButton.classList.toggle("active");
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const supButton = document.getElementById("supButton");
+
+            supButton.addEventListener("click", function () {
+                document.execCommand("superscript", false, "");             // Apply or remove superscript
+                supButton.classList.toggle("active");
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const subButton = document.getElementById("subButton");
+
+            subButton.addEventListener("click", function () {
+                document.execCommand("subscript", false, "");             // Apply or remove subscript
+                subButton.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+</html>
