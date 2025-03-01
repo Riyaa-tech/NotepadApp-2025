@@ -228,9 +228,5 @@ textarea:focus, #noteContent:focus, #inputContent:focus {
     width : 820px !important;
     height : 110px !important;
     overflow: hidden;
-    white-space: normal;
     text-overflow: ellipsis !important;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4 !important!;
 }
