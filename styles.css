@@ -112,7 +112,7 @@ textarea, #noteContent {
     width: 100%;
 }
 
-textarea:focus, #noteContent:focus, #inputContent:focus, .contentspan:focus {
+textarea:focus, #noteContent:focus, #inputContent:focus, #displayContent:focus, .contentspan:focus {
     outline: none;
 }
 
@@ -228,5 +228,4 @@ textarea:focus, #noteContent:focus, #inputContent:focus, .contentspan:focus {
     width : 820px !important;
     height : 110px !important;
     overflow: hidden !important;
-    text-overflow: ellipsis !important;
 }
