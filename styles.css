@@ -227,6 +227,6 @@ textarea:focus, #noteContent:focus, #inputContent:focus {
     margin-top: 5px;
     width : 820px !important;
     height : 110px !important;
-    overflow: hidden;
+    overflow: hidden !important;
     text-overflow: ellipsis !important;
 }
