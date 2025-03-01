@@ -224,15 +224,14 @@ textarea:focus, #noteContent:focus, #inputContent:focus {
 }
 
 .contentspan {
-    width: 630px;
+    margin-top: 5px;
     height: 140px !important; 
     text-overflow: ellipsis; 
     overflow: hidden;
-}
-
-.contenth2 {
-    width: 630px;
-    height: 140px !important; 
-    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
 }
