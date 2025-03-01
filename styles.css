@@ -112,7 +112,7 @@ textarea, #noteContent {
     width: 100%;
 }
 
-textarea:focus, #noteContent:focus, #inputContent:focus, #displayContent:focus, .contentspan:focus {
+textarea:focus, #noteContent:focus, #inputContent:focus {
     outline: none;
 }
 
