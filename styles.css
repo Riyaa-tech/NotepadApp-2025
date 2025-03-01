@@ -225,13 +225,12 @@ textarea:focus, #noteContent:focus, #inputContent:focus {
 
 .contentspan {
     margin-top: 5px;
-    height: 140px !important; 
+    width : 820px;
+    height : 110px !important; 
     text-overflow: ellipsis; 
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: normal;
 }
