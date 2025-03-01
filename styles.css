@@ -222,3 +222,17 @@ textarea:focus, #noteContent:focus, #inputContent:focus {
 .toolColor.active {
     border: 2px solid white;
 }
+
+.contentspan {
+    width: 630px;
+    height: 140px !important; 
+    text-overflow: ellipsis; 
+    overflow: hidden;
+}
+
+.contenth2 {
+    width: 630px;
+    height: 140px !important; 
+    text-overflow: ellipsis; 
+    overflow: hidden;
+}
